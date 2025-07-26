@@ -20,36 +20,43 @@ function logEntry(operation, prevResult, number, result) {
   console.log(logEntry);
 }
 
-function add() {
+function calculationLogic(calculationType) {
   const enteredNumber = getUserNumberInput();
   const initialResult = currentResult;
-  currentResult += enteredNumber;
-  createAndWriteOutput("+", initialResult, enteredNumber);
-  logEntry("add", initialResult, enteredNumber, currentResult);
+  let mathOperator;
+
+  if (calculationType === "add") {
+    currentResult += enteredNumber;
+    mathOperator = "+";
+  } else if (calculationType === "subtract") {
+    currentResult -= enteredNumber;
+    mathOperator = "-";
+  } else if (calculationType === "multiply") {
+    currentResult *= enteredNumber;
+    mathOperator = "*";
+  } else if (calculationType === "devide") {
+    currentResult /= enteredNumber;
+    mathOperator = "/";
+  }
+
+  createAndWriteOutput(mathOperator, initialResult, enteredNumber);
+  logEntry(calculationType, initialResult, enteredNumber, currentResult);
+}
+
+function add() {
+  calculationLogic("add");
 }
 
 function subtract() {
-  const enteredNumber = getUserNumberInput();
-  const initialResult = currentResult;
-  currentResult -= enteredNumber;
-  createAndWriteOutput("-", initialResult, enteredNumber);
-  logEntry("subtract", initialResult, enteredNumber, currentResult);
+  calculationLogic("subtract");
 }
 
 function multiply() {
-  const enteredNumber = getUserNumberInput();
-  const initialResult = currentResult;
-  currentResult *= enteredNumber;
-  createAndWriteOutput("*", initialResult, enteredNumber);
-  logEntry("multiply", initialResult, enteredNumber, currentResult);
+  calculationLogic("multiply");
 }
 
 function divide() {
-  const enteredNumber = getUserNumberInput();
-  const initialResult = currentResult;
-  currentResult /= enteredNumber;
-  createAndWriteOutput("/", initialResult, enteredNumber);
-  logEntry("devide", initialResult, enteredNumber, currentResult);
+  calculationLogic("devide");
 }
 
 addBtn.addEventListener("click", add);
